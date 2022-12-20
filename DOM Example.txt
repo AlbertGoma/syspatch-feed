@@ -1,0 +1,427 @@
+#Document
+    <!DOCTYPE html "" "">
+    <html lang="en" id="errata">
+        <head>
+            <meta charset="utf-8">
+            #text: \n\n
+            <title>
+                #text: OpenBSD 7.2 Errata
+            #text: \n
+            <meta name="description" content="the OpenBSD errata page">
+            #text: \n
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            #text: \n
+            <link rel="stylesheet" type="text/css" href="openbsd.css">
+            #text: \n
+            <link rel="canonical" href="https://www.openbsd.org/errata72.html">
+            #text: \n\n
+            <!-- \n\t\t\tIMPORTANT REMINDER\n\tIF YOU ADD A NEW ERRATUM, MAIL THE PATCH TO TECH AND ANNOUNCE\n -->
+            #text: \n\n
+        <body>
+            <h2 id="OpenBSD">
+                #text: \n
+                <a href="index.html">
+                    #text: \n
+                    <i>
+                        #text: Open
+                    <b>
+                        #text: BSD
+                #text: \n7.2 Errata\n
+            #text: \n
+            <hr>
+            #text: \n\nFor errata on a certain release, click below:
+            <br>
+            #text: \n
+            <a href="errata20.html">
+                #text: 2.0
+            #text: ,\n
+            <a href="errata21.html">
+                #text: 2.1
+            #text: ,\n
+            <a href="errata22.html">
+                #text: 2.2
+            #text: ,\n
+            <a href="errata23.html">
+                #text: 2.3
+            #text: ,\n
+            <a href="errata24.html">
+                #text: 2.4
+            #text: ,\n
+            <a href="errata25.html">
+                #text: 2.5
+            #text: ,\n
+            <a href="errata26.html">
+                #text: 2.6
+            #text: ,\n
+            <a href="errata27.html">
+                #text: 2.7
+            #text: ,\n
+            <a href="errata28.html">
+                #text: 2.8
+            #text: ,\n
+            <a href="errata29.html">
+                #text: 2.9
+            #text: ,\n
+            <a href="errata30.html">
+                #text: 3.0
+            #text: ,\n
+            <a href="errata31.html">
+                #text: 3.1
+            #text: ,\n
+            <a href="errata32.html">
+                #text: 3.2
+            #text: ,\n
+            <a href="errata33.html">
+                #text: 3.3
+            #text: ,\n
+            <a href="errata34.html">
+                #text: 3.4
+            #text: ,\n
+            <a href="errata35.html">
+                #text: 3.5
+            #text: ,\n
+            <br>
+            #text: \n
+            <a href="errata36.html">
+                #text: 3.6
+            #text: ,\n
+            <a href="errata37.html">
+                #text: 3.7
+            #text: ,\n
+            <a href="errata38.html">
+                #text: 3.8
+            #text: ,\n
+            <a href="errata39.html">
+                #text: 3.9
+            #text: ,\n
+            <a href="errata40.html">
+                #text: 4.0
+            #text: ,\n
+            <a href="errata41.html">
+                #text: 4.1
+            #text: ,\n
+            <a href="errata42.html">
+                #text: 4.2
+            #text: ,\n
+            <a href="errata43.html">
+                #text: 4.3
+            #text: ,\n
+            <a href="errata44.html">
+                #text: 4.4
+            #text: ,\n
+            <a href="errata45.html">
+                #text: 4.5
+            #text: ,\n
+            <a href="errata46.html">
+                #text: 4.6
+            #text: ,\n
+            <a href="errata47.html">
+                #text: 4.7
+            #text: ,\n
+            <a href="errata48.html">
+                #text: 4.8
+            #text: ,\n
+            <a href="errata49.html">
+                #text: 4.9
+            #text: ,\n
+            <a href="errata50.html">
+                #text: 5.0
+            #text: ,\n
+            <a href="errata51.html">
+                #text: 5.1
+            #text: ,\n
+            <br>
+            #text: \n
+            <a href="errata52.html">
+                #text: 5.2
+            #text: ,\n
+            <a href="errata53.html">
+                #text: 5.3
+            #text: ,\n
+            <a href="errata54.html">
+                #text: 5.4
+            #text: ,\n
+            <a href="errata55.html">
+                #text: 5.5
+            #text: ,\n
+            <a href="errata56.html">
+                #text: 5.6
+            #text: ,\n
+            <a href="errata57.html">
+                #text: 5.7
+            #text: ,\n
+            <a href="errata58.html">
+                #text: 5.8
+            #text: ,\n
+            <a href="errata59.html">
+                #text: 5.9
+            #text: ,\n
+            <a href="errata60.html">
+                #text: 6.0
+            #text: ,\n
+            <a href="errata61.html">
+                #text: 6.1
+            #text: ,\n
+            <a href="errata62.html">
+                #text: 6.2
+            #text: ,\n
+            <a href="errata63.html">
+                #text: 6.3
+            #text: ,\n
+            <a href="errata64.html">
+                #text: 6.4
+            #text: ,\n
+            <a href="errata65.html">
+                #text: 6.5
+            #text: ,\n
+            <a href="errata66.html">
+                #text: 6.6
+            #text: ,\n
+            <a href="errata67.html">
+                #text: 6.7
+            #text: ,\n
+            <br>
+            #text: \n
+            <a href="errata68.html">
+                #text: 6.8
+            #text: ,\n
+            <a href="errata69.html">
+                #text: 6.9
+            #text: ,\n
+            <a href="errata70.html">
+                #text: 7.0
+            #text: ,\n
+            <a href="errata71.html">
+                #text: 7.1
+            #text: .\n
+            <hr>
+            #text: \n\n
+            <p>
+                #text: \nPatches for the OpenBSD base system are distributed as unified diffs.\nEach patch is cryptographically signed with the\n
+                <a href="https://man.openbsd.org/OpenBSD-7.2/signify.1">
+                    #text: signify(1)
+                #text:  tool and contains\nusage instructions.\nAll the following patches are also available in one\n
+                <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2.tar.gz">
+                    #text: tar.gz file
+                #text: \nfor convenience.\n\n
+            <p>
+                #text: \nAlternatively, the
+                <a href="https://man.openbsd.org/syspatch">
+                    #text: syspatch(8)
+                #text: \nutility can be used to apply binary updates on the following architectures:\namd64, i386, arm64.\n\n
+            <p>
+                #text: \nPatches for supported releases are also incorporated into the\n
+                <a href="stable.html">
+                    #text: -stable branch
+                #text: , which is maintained for one year\nafter release.\n\n
+            <hr>
+            #text: \n\n
+            <ul>
+                #text: \n\n
+                <li id="p001_x509">
+                    #text: \n
+                    <strong>
+                        #text: 001: SECURITY FIX: October 24, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nCustom verification callbacks could cause the X.509 verifier to fail\nto store errors resulting from leaf certificate verification.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/001_x509.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p002_asn1">
+                    #text: \n
+                    <strong>
+                        #text: 002: RELIABILITY FIX: October 24, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nUnbreak ASN.1 indefinite length encoding.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/002_asn1.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p003_ukbd">
+                    #text: \n
+                    <strong>
+                        #text: 003: RELIABILITY FIX: October 27, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nRestore operation of Apple-specific Fn-key keyboard sequences.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/003_ukbd.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p004_expat">
+                    #text: \n
+                    <strong>
+                        #text: 004: SECURITY FIX: November 1, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nIn libexpat fix heap use-after-free vulnerability CVE-2022-43680.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/004_expat.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p005_pixman">
+                    #text: \n
+                    <strong>
+                        #text: 005: SECURITY FIX: November 14, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nCVE-2022-44638: An integer overflow in pixman may lead to an out-of-bounds\nwrite.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/005_pixman.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p006_vmm">
+                    #text: \n
+                    <strong>
+                        #text: 006: RELIABILITY FIX: November 26, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: amd64
+                    #text: \n
+                    <br>
+                    #text: \nIncorrect reference counting and locking caused a vmm(4) performance\nregression.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/006_vmm.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p007_unwind">
+                    #text: \n
+                    <strong>
+                        #text: 007: SECURITY FIX: November 26, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nA crafted TCP query from localhost could crash the unwind(8) daemon.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/007_unwind.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p008_pfsync">
+                    #text: \n
+                    <strong>
+                        #text: 008: RELIABILITY FIX: November 26, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nFix a assertion crash during pfsync state update.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/008_pfsync.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p009_xserver">
+                    #text: \n
+                    <strong>
+                        #text: 009: SECURITY FIX: December 14, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nIn X11 server fix local privileges elevation and and remote code\nexecution for ssh X forwarding sessions.  This addresses CVE-2022-46340\nCVE-2022-46341 CVE-2022-46342 CVE-2022-46343 CVE-2022-46344.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/009_xserver.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p010_vmd">
+                    #text: \n
+                    <strong>
+                        #text: 010: RELIABILITY FIX: December 14, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: amd64
+                    #text: \n
+                    <br>
+                    #text: \nFix booting vmd(8) guests from ramdisk with more than 4g of memory.\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/010_vmd.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p011_gpuinv">
+                    #text: \n
+                    <strong>
+                        #text: 011: RELIABILITY FIX: December 14, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: amd64 i386
+                    #text: \n
+                    <br>
+                    #text: \nTLB entries were not invalidated for all types of engine on\n12th generation Intel graphics (Tiger Lake, Rocket Lake, Alder Lake).\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/011_gpuinv.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+                <li id="p012_acme">
+                    #text: \n
+                    <strong>
+                        #text: 012: RELIABILITY FIX: December 16, 2022
+                    #text: \n\u{a0}
+                    <i>
+                        #text: All architectures
+                    #text: \n
+                    <br>
+                    #text: \nRemoving a domain can result in an out-of-bounds write in acme-client(8).\n
+                    <br>
+                    #text: \n
+                    <a href="https://ftp.openbsd.org/pub/OpenBSD/patches/7.2/common/012_acme.patch.sig">
+                        #text: \nA source code patch exists which remedies this problem.
+                    #text: \n
+                    <p>
+                        #text: \n\n
+            #text: \n\n
+            <hr>
+            #text: \n

@@ -1,19 +1,23 @@
 [package]
-name = "{{project-name}}"
+name = "syspatch_feed"
 version = "0.1.0"
-authors = ["{{authors}}"]
-edition = "2018"
+authors = ["Albert Gomà i León"]
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+
 
 [features]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-cfg-if = "0.1.2"
-worker = "0.0.9"
-serde_json = "1.0.67"
+cfg-if = "1.0.0"
+worker = "0.0.12"
+html5ever = "0.26.0"
+markup5ever_rcdom = "0.2.0"
+chrono = "0.4.23"
+
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
