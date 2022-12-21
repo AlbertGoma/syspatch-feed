@@ -1,7 +1,7 @@
-use std::collections::HashMap;
-use std::process::exit;
 use html5ever::tendril::StrTendril;
 use markup5ever_rcdom::{Handle, RcDom};
+use std::collections::HashMap;
+use std::process::exit;
 use worker::{console_error, console_warn};
 
 use crate::html_util::{get_html, parse_html};
@@ -9,18 +9,14 @@ use crate::traverse_dom::{TraverseAttrs, TraverseDom};
 
 const PATCHES_URL: &str = "https://ftp.openbsd.org/pub/OpenBSD/patches/";
 
-
 pub struct DateIndex {
-    idx: Option<HashMap::<String, StrTendril>>,
+    idx: Option<HashMap<String, StrTendril>>,
     version: u16,
 }
 
 impl DateIndex {
     pub fn new(version: u16) -> DateIndex {
-        DateIndex {
-            idx: None,
-            version
-        }
+        DateIndex { idx: None, version }
     }
 
     fn fill_date_idx(&mut self, dom: &RcDom) {
@@ -32,7 +28,7 @@ impl DateIndex {
                     return;
                 }
             }
-                .first_child_by_name("body")
+            .first_child_by_name("body")
             {
                 Some(body) => body,
                 None => {
@@ -40,7 +36,7 @@ impl DateIndex {
                     return;
                 }
             }
-                .first_child_by_name("pre")
+            .first_child_by_name("pre")
             {
                 Some(pre) => pre.index_following_text_by_children_attr(
                     "href",
@@ -63,7 +59,7 @@ impl DateIndex {
                 exit(1);
             }
         }
-            .first_child_by_name("body")
+        .first_child_by_name("body")
         {
             Some(body) => body,
             None => {
@@ -71,7 +67,7 @@ impl DateIndex {
                 exit(1);
             }
         }
-            .first_child_by_name("pre")
+        .first_child_by_name("pre")
         {
             Some(pre) => pre.children_by_name("a"),
             None => {
@@ -79,12 +75,12 @@ impl DateIndex {
                 Vec::<Handle>::new()
             }
         }
-            .iter()
-            .filter_map(|a| a.data.first_attr_by_name("href"))
-            .filter(|href| href.ends_with("/"))
-            .filter(|href| !href.starts_with("."))
-            .map(|href| href.to_string())
-            .collect()
+        .iter()
+        .filter_map(|a| a.data.first_attr_by_name("href"))
+        .filter(|href| href.ends_with("/"))
+        .filter(|href| !href.starts_with("."))
+        .map(|href| href.to_string())
+        .collect()
     }
 
     pub async fn lazy_load(&mut self, version: u16) -> &mut Option<HashMap<String, StrTendril>> {
@@ -94,12 +90,12 @@ impl DateIndex {
                 self.idx = Some(HashMap::<String, StrTendril>::new());
                 load = true;
                 self.version = version
-            },
+            }
             Some(ref mut idx) if self.version != version => {
                 idx.clear();
                 load = true;
                 self.version = version
-            },
+            }
             _ => {}
         };
         if load {
