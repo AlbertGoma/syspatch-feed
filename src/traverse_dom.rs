@@ -4,7 +4,7 @@ use markup5ever_rcdom::{Handle, Node, NodeData};
 use std::borrow::Borrow;
 use std::collections::HashMap;
 
-pub(crate) trait Traverse {
+pub(crate) trait TraverseDom {
     fn first_child_by_name(&self, name: &str) -> Option<Handle>;
     fn children_by_name(&self, name: &str) -> Vec<Handle>;
     fn get_first_text(&self) -> String;
@@ -16,7 +16,7 @@ pub(crate) trait Traverse {
     );
 }
 
-impl Traverse for Node {
+impl TraverseDom for Node {
     fn first_child_by_name(&self, child_name: &str) -> Option<Handle> {
         for child in self.children.borrow().as_slice() {
             if let Element { ref name, .. } = child.data {

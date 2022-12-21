@@ -16,7 +16,7 @@ worker = "0.0.12"
 html5ever = "0.26.0"
 markup5ever_rcdom = "0.2.0"
 chrono = "0.4.23"
-futures = "0.3.25"
+#futures = "0.3.25"
 regex = {version = "1.7.0", features = ["std", "perf-literal", "unicode", "unicode-bool", "unicode-gencat"]}
 
 
