@@ -2,11 +2,13 @@ extern crate core;
 
 use crate::atom_entry::AtomEntry;
 use crate::traverse_dom::{TraverseDom, TraverseAttrs};
-use chrono::{DateTime, Duration, FixedOffset};
+use chrono::{DateTime, Duration, FixedOffset, Utc};
 use html5ever::{tendril::StrTendril};
 use markup5ever_rcdom::{Handle, RcDom};
 use regex::Regex;
 use std::{process::exit, u16};
+use std::cmp::Ordering;
+use std::str::FromStr;
 use worker::{
     console_debug, console_error, console_warn, event, Env, ScheduleContext, ScheduledEvent
 };
@@ -19,8 +21,8 @@ mod date_index;
 mod html_util;
 
 const ERRATA_URL: &str = "https://www.openbsd.org/errata";
-const MIN_VERSION: u16 = 22;
-
+const MIN_VERSION: u16 = 65;//22;
+const ISO_UTC_FORMAT: &str = "%Y-%m-%dT%H:%M:%S%z";
 
 
 fn get_title(patch: &Handle, entries: &mut Vec<AtomEntry>, version: u16) -> Option<String> {
@@ -38,7 +40,7 @@ fn get_title(patch: &Handle, entries: &mut Vec<AtomEntry>, version: u16) -> Opti
                 }
             }
             .content += &cerealize(patch.clone());
-            console_debug!("new_content = {:?}", last_entry);
+            //console_debug!("new_content = {:?}", last_entry);
             None
         }
     }
@@ -123,6 +125,60 @@ async fn get_updated_date(
     }
 }
 
+fn render_feed(entries: &mut Vec<AtomEntry>) -> String {
+    entries.sort_by(|a, b| {
+        match b.release_version.cmp(&a.release_version) {
+            Ordering::Less => Ordering::Less,
+            Ordering::Equal => b.iteration_count.cmp(&a.iteration_count),
+            Ordering::Greater => Ordering::Greater,
+        }
+    });
+
+    let mut feed = format!(concat!(
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n",
+        "<feed xmlns=\"http://www.w3.org/2005/Atom\">\n",
+        "   <title>{title}</title>\n",
+        "   <link rel=\"related\" href=\"{link}\"/>\n",
+        "   <updated>{updated}</updated>\n",
+        "   <author>\n",
+        "       <name>{author_name}</name>\n",
+        "       <uri>{author_uri}</uri>\n",
+        "   </author>\n",
+        "   <id>{id}</id>\n",
+
+    ),
+        title = "OpenBSD Syspatch Feed",
+        link = "https://www.openbsd.org",
+        updated = Utc::now().format(ISO_UTC_FORMAT),
+        author_name = "Albert Gomà i León",
+        author_uri = "https://albert.goma.cat",
+        id = "albert.goma.cat,2022:feed/openbsd/sypatch"
+    );
+    for entry in entries {
+        feed += &format!(concat!(
+        "   <entry>\n",
+        "       <id>{id_prefix}{id}</id>\n",
+        "       <title type=\"text\">{title}</title>\n",
+        "       <updated>{updated}</updated>\n",
+        "       <content type =\"html\">{content}</content>\n",
+        "       <link rel=\"alternate\" type=\"text/html\" href=\"{link}\"/>\n",
+        "   </entry>\n"
+        ),
+            id_prefix = "albert.goma.cat,2022:",
+            id = entry.id,
+            title = entry.title,
+            updated = entry.updated.format(ISO_UTC_FORMAT),
+            content = entry.content,
+            link = entry.link
+        );
+    }
+
+    feed += "</feed>";
+
+    console_debug!("{}",feed);
+    base64::encode(feed)
+}
+
 #[event(scheduled)]
 pub async fn scheduled(_: ScheduledEvent, env: Env, _: ScheduleContext) {
     let mut entries = Vec::<AtomEntry>::new();
@@ -174,8 +230,10 @@ pub async fn scheduled(_: ScheduledEvent, env: Env, _: ScheduleContext) {
                 updated,
                 link: errata_url.clone(),
                 content,
+                release_version: version,
+                iteration_count: i
             };
-            console_debug!("{:?}", atom_entry);
+            //console_debug!("{:?}", atom_entry);
             entries.push(atom_entry);
         }
 
@@ -183,6 +241,6 @@ pub async fn scheduled(_: ScheduledEvent, env: Env, _: ScheduleContext) {
     }
 
     //Render Feed
-
+    let feed = render_feed(&mut entries);
     //Upload to git
 }

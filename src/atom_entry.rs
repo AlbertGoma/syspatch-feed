@@ -7,4 +7,6 @@ pub struct AtomEntry {
     pub updated: DateTime<FixedOffset>,
     pub link: String,
     pub content: String,
+    pub release_version: u16,
+    pub iteration_count: usize,
 }
