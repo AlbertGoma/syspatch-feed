@@ -425,3 +425,123 @@
             #text: \n\n
             <hr>
             #text: \n
+
+
+
+#Document
+    <!DOCTYPE html "" "">
+    <html>
+        <head>
+            #text: \n
+            <meta charset="utf-8">
+            #text: \n
+            <title>
+                #text: Index of /pub/OpenBSD/patches/2.2/common/
+            #text: \n
+            <style type="text/css">
+                #text: <!--\nbody { background-color: white; color: black; font-family: sans-serif; }\nhr { border: 0; border-bottom: 1px dashed; }\n@media (prefers-color-scheme: dark) {\nbody { background-color: #1E1F21; color: #EEEFF1; }\na { color: #BAD7FF; }\n}\n-->
+            #text: \n
+        #text: \n
+        <body>
+            #text: \n
+            <h1>
+                #text: Index of /pub/OpenBSD/patches/2.2/common/
+            #text: \n
+            <hr>
+            #text: \n
+            <pre>
+                <a href="../">
+                    #text: ../
+                #text:                                                 07-Jan-2005 12:30                   -\n
+                <a href="ipsec.patch">
+                    #text: ipsec.patch
+                #text:                                         05-May-1998 00:00                2931\n
+                <a href="mountd.patch">
+                    #text: mountd.patch
+                #text:                                        02-Mar-1998 00:00                1794\n
+                <a href="named.patch">
+                    #text: named.patch
+                #text:                                         30-Mar-1998 00:00                1498\n
+                <a href="nosuidcoredump.patch">
+                    #text: nosuidcoredump.patch
+                #text:                                13-Feb-1998 00:00                2688\n
+                <a href="ping.patch">
+                    #text: ping.patch
+                #text:                                          31-Mar-1998 00:00                2518\n
+                <a href="rcmd.patch">
+                    #text: rcmd.patch
+                #text:                                          15-Feb-1998 00:00                2172\n
+                <a href="readlink.c">
+                    #text: readlink.c
+                #text:                                          19-Feb-1998 00:00                2462\n
+                <a href="rmjob.patch">
+                    #text: rmjob.patch
+                #text:                                         22-Apr-1998 00:00                1059\n
+                <a href="send.patch">
+                    #text: send.patch
+                #text:                                          18-Mar-1998 00:00                 914\n
+                <a href="sourceroute.patch">
+                    #text: sourceroute.patch
+                #text:                                   19-Feb-1998 00:00                1587\n
+                <a href="uucpd.patch">
+                    #text: uucpd.patch
+                #text:                                         22-Apr-1998 00:00                1000\n
+                <a href="vm_mmap.patch">
+                    #text: vm_mmap.patch
+                #text:                                       26-Feb-1998 00:00                2012\n
+                <a href="xterm-xaw.patch">
+                    #text: xterm-xaw.patch
+                #text:                                     03-May-1998 00:00                7180\n
+            #text: \n
+            <hr>
+            #text: \n\n\n
+
+
+
+
+#Document
+    <!DOCTYPE html "" "">
+    <html>
+        <head>
+            #text: \n
+            <meta charset="utf-8">
+            #text: \n
+            <title>
+                #text: Index of /pub/OpenBSD/patches/2.2/
+            #text: \n
+            <style type="text/css">
+                #text: <!--\nbody { background-color: white; color: black; font-family: sans-serif; }\nhr { border: 0; border-bottom: 1px dashed; }\n@media (prefers-color-scheme: dark) {\nbody { background-color: #1E1F21; color: #EEEFF1; }\na { color: #BAD7FF; }\n}\n-->
+            #text: \n
+        #text: \n
+        <body>
+            #text: \n
+            <h1>
+                #text: Index of /pub/OpenBSD/patches/2.2/
+            #text: \n
+            <hr>
+            #text: \n
+            <pre>
+                <a href="../">
+                    #text: ../
+                #text:                                                 24-Oct-2022 09:41                   -\n
+                <a href="README">
+                    #text: README
+                #text:                                              21-Apr-1999 00:00                  88\n
+                <a href="amiga/">
+                    #text: amiga/
+                #text:                                              07-Jan-2005 12:32                   -\n
+                <a href="common/">
+                    #text: common/
+                #text:                                             07-Jan-2005 12:30                   -\n
+                <a href="i386/">
+                    #text: i386/
+                #text:                                               07-Jan-2005 12:32                   -\n
+                <a href="pmax/">
+                    #text: pmax/
+                #text:                                               07-Jan-2005 12:32                   -\n
+                <a href="sparc/">
+                    #text: sparc/
+                #text:                                              07-Jan-2005 12:31                   -\n
+            #text: \n
+            <hr>
+            #text: \n\n\n
