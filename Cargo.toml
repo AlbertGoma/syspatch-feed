@@ -18,6 +18,8 @@ markup5ever_rcdom = "0.2.0"
 chrono = "0.4.23"
 regex = {version = "1.7.0", features = ["std", "perf-literal", "unicode", "unicode-bool", "unicode-gencat"]}
 base64 = "0.20.0"
+html-escape = "0.2.12"
+sha = "1.0.3"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires

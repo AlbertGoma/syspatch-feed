@@ -18,4 +18,4 @@ type = "CompiledWasm"
 # https://developers.cloudflare.com/workers/cli-wrangler/configuration
 
 [triggers]
-crons = ["0 */2 * * *"]
+crons = ["0 * * * *"]

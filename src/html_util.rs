@@ -3,9 +3,13 @@ use html5ever::{parse_document, serialize, ParseOpts};
 use markup5ever_rcdom::{Handle, RcDom, SerializableHandle};
 use std::io::BufWriter;
 use std::process::exit;
-use worker::{console_error, Fetch, Url};
+use sha::sha1::Sha1;
+use sha::utils::{Digest, DigestExt};
+use worker::{CfProperties, console_error, Fetch, Headers, Method, Request, RequestInit, RequestRedirect, Secret, Url};
+use worker::wasm_bindgen::JsValue;
+use crate::{FEED_AUTHOR_NAME, GITHUB_API_VERSION, GITHUB_COMMIT_EMAIL, GITHUB_COMMIT_MESSAGE};
 
-pub fn fetch(url: &str) -> Fetch {
+pub fn fetch_req(url: &str) -> Fetch {
     Fetch::Url(match Url::parse(url) {
         Ok(url) => url,
         Err(e) => {
@@ -57,26 +61,103 @@ pub fn cerealize(node: Handle) -> String {
     }
 }
 
-pub async fn get_html(errata_url: &str) -> Result<String, u16> {
-    let mut errata_res = match fetch(errata_url).send().await {
+pub async fn http_get(url: &str) -> Result<(String, Option<String>), u16> {
+    let mut res = match fetch_req(url).send().await {
         Ok(res) => res,
         Err(e) => {
             console_error!("Error Fetching URLS: {}", e);
             exit(1);
         }
     };
-    let errata_html = match errata_res.text().await {
-        Ok(html) => html,
+
+    let ret = match res.bytes().await {
+        Ok(bytes) => {
+            let sha = Sha1::default().digest(&bytes).to_hex();
+            match String::from_utf8(bytes) {
+                Ok(text) if text.len() > 0 => (text, Some(sha)),
+                Ok(text) => (text, None),
+                Err(e) => {
+                    console_error!("Error parsing response: {}", e);
+                    exit(1);
+                }
+            }
+        },
         Err(e) => {
             console_error!("Response Error: {}", e);
             exit(1);
         }
     };
-    match errata_res.status_code() {
-        200 => Ok(errata_html),
+    match res.status_code() {
+        200 => Ok(ret),
         404 => Err(404),
         _ => {
-            console_error!("Server Error: {}", errata_res.status_code());
+            console_error!("Server Error: {}", res.status_code());
+            exit(2);
+        }
+    }
+}
+
+pub async fn github_commit(url: &str, token: Secret, content: &str, sha: Option<String>) -> Result<(), u16> {
+
+    let token = match JsValue::from(token).as_string() {
+        Some(secret) => secret,
+        None => {
+            console_error!("Error Accessing GitHub token");
+            exit(1);
+        }
+    };
+    let mut headers = Headers::new();
+    let _ = headers.set("Accept", "application/vnd.github+json");
+    let _ = headers.set("Authorization", &(String::from("Bearer ") + &token));
+    let _ = headers.set("X-GitHub-Api-Version", GITHUB_API_VERSION);
+
+    let sha_str = match sha {
+        Some(sha) => String::from(",\"sha\":\"") + &sha + "\"",
+        None => String::new(),
+    };
+
+    let body = JsValue::from_str(&*format!(concat!("{{",
+        "\"message\":\"{message}\",",
+        "\"committer\":{{",
+        "\"name\":\"{name}\",",
+        "\"email\":\"{email}\"",
+        "}},\"content\":\"{content}\"",
+        "{sha}",
+        "}}"),
+       message = GITHUB_COMMIT_MESSAGE,
+       name = FEED_AUTHOR_NAME,
+       email = GITHUB_COMMIT_EMAIL,
+       content = content,
+       sha = sha_str,
+    ));
+
+    let req = match Request::new_with_init(
+        url,
+        &RequestInit {
+                body: Some(body),
+                headers,
+                cf: CfProperties::default(),
+                method: Method::Put,
+                redirect: RequestRedirect::Follow
+        }
+    ) {
+        Ok(req) => req,
+        Err(e) => {
+            console_error!("Error generating request: {}", e);
+            exit(1);
+        }
+    };
+    let res = match Fetch::Request(req).send().await {
+        Ok(res) => res,
+        Err(e) => {
+            console_error!("Error Fetching URLS: {}", e);
+            exit(1);
+        }
+    };
+    match res.status_code() {
+        200..=201 => Ok(()),
+        _ => {
+            console_error!("Server Error: {}", res.status_code());
             exit(2);
         }
     }

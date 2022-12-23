@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::process::exit;
 use worker::{console_error, console_warn};
 
-use crate::html_util::{get_html, parse_html};
+use crate::html_util::{http_get, parse_html};
 use crate::traverse_dom::{TraverseAttrs, TraverseDom};
 
 const PATCHES_URL: &str = "https://ftp.openbsd.org/pub/OpenBSD/patches/";
@@ -83,7 +83,7 @@ impl DateIndex {
         .collect()
     }
 
-    pub async fn lazy_load(&mut self, version: u16) -> &mut Option<HashMap<String, StrTendril>> {
+    pub async fn lazy_load(&mut self, version: u16, request_ctr: &mut u8) -> &mut Option<HashMap<String, StrTendril>> {
         let mut load = false;
         match self.idx {
             None => {
@@ -100,7 +100,8 @@ impl DateIndex {
         };
         if load {
             let arch_url = PATCHES_URL.to_owned() + &format!("{:.1}/", version as f32 / 10.);
-            let mut arch_html = match get_html(&arch_url).await {
+            *request_ctr += 1;
+            let (mut arch_html, _) = match http_get(&arch_url).await {
                 Ok(html) => html,
                 Err(_) => return &mut self.idx,
             };
@@ -108,7 +109,8 @@ impl DateIndex {
             let archs = Self::get_archs(&arch_dom);
 
             for arch in archs {
-                let mut arch_html = match get_html(&(arch_url.clone() + &arch + "/")).await {
+                *request_ctr += 1;
+                let (mut arch_html, _) = match http_get(&(arch_url.clone() + &arch + "/")).await {
                     Ok(html) => html,
                     Err(_) => break,
                 };
