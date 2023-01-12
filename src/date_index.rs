@@ -2,13 +2,12 @@ use html5ever::tendril::StrTendril;
 use markup5ever_rcdom::{Handle, RcDom};
 use std::collections::HashMap;
 use std::process::exit;
-use worker::{console_error, console_warn};
 
-use crate::html_util::{http_get, parse_html};
+use crate::html::{http_get, parse_html};
 use crate::traverse_dom::{TraverseAttrs, TraverseDom};
+use crate::PATCHES_URL;
 
-const PATCHES_URL: &str = "https://ftp.openbsd.org/pub/OpenBSD/patches/";
-
+#[derive(Debug)]
 pub struct DateIndex {
     idx: Option<HashMap<String, StrTendril>>,
     version: u16,
@@ -24,7 +23,7 @@ impl DateIndex {
             match match match &dom.document.first_child_by_name("html") {
                 Some(html) => html,
                 None => {
-                    console_warn!("Document Error: Missing <html> tag");
+                    eprintln!("Document Error: Missing <html> tag");
                     return;
                 }
             }
@@ -32,7 +31,7 @@ impl DateIndex {
             {
                 Some(body) => body,
                 None => {
-                    console_warn!("Document Error: Missing <body> tag");
+                    eprintln!("Document Error: Missing <body> tag");
                     return;
                 }
             }
@@ -42,11 +41,12 @@ impl DateIndex {
                     "href",
                     |mut attr| {
                         attr.replace_range(attr.find(".patch").unwrap_or(attr.len()).., "");
+                        println!("Replaced ftp date string: {}", attr);
                         attr
                     },
                     idx,
                 ),
-                None => console_warn!("Document Error: Missing <pre> tag. New release?"),
+                None => eprintln!("Document Error: Missing <pre> tag. New release?"),
             };
         }
     }
@@ -55,7 +55,7 @@ impl DateIndex {
         match match match &dom.document.first_child_by_name("html") {
             Some(html) => html,
             None => {
-                console_error!("Document Error: Missing <html> tag");
+                eprintln!("Document Error: Missing <html> tag");
                 exit(1);
             }
         }
@@ -63,7 +63,7 @@ impl DateIndex {
         {
             Some(body) => body,
             None => {
-                console_error!("Document Error: Missing <body> tag");
+                eprintln!("Document Error: Missing <body> tag");
                 exit(1);
             }
         }
@@ -71,7 +71,7 @@ impl DateIndex {
         {
             Some(pre) => pre.children_by_name("a"),
             None => {
-                console_warn!("Document Error: Missing <pre> tag. New release?");
+                eprintln!("Document Error: Missing <pre> tag. New release?");
                 Vec::<Handle>::new()
             }
         }
@@ -83,7 +83,7 @@ impl DateIndex {
         .collect()
     }
 
-    pub async fn lazy_load(&mut self, version: u16, request_ctr: &mut u8) -> &mut Option<HashMap<String, StrTendril>> {
+    pub async fn lazy_load(&mut self, version: u16) -> &mut Option<HashMap<String, StrTendril>> {
         let mut load = false;
         match self.idx {
             None => {
@@ -100,18 +100,18 @@ impl DateIndex {
         };
         if load {
             let arch_url = PATCHES_URL.to_owned() + &format!("{:.1}/", version as f32 / 10.);
-            *request_ctr += 1;
-            let (mut arch_html, _) = match http_get(&arch_url).await {
-                Ok(html) => html,
+
+            let mut arch_html = match http_get(&arch_url, false).await {
+                Ok((html, _)) => html,
                 Err(_) => return &mut self.idx,
             };
             let arch_dom = parse_html(&mut arch_html);
             let archs = Self::get_archs(&arch_dom);
 
             for arch in archs {
-                *request_ctr += 1;
-                let (mut arch_html, _) = match http_get(&(arch_url.clone() + &arch + "/")).await {
-                    Ok(html) => html,
+                println!("Arch: {}", arch.as_str());
+                let mut arch_html = match http_get(&(arch_url.clone() + &arch), false).await {
+                    Ok((html, _)) => html,
                     Err(_) => break,
                 };
                 let arch_dom = parse_html(&mut arch_html);

@@ -1,8 +1,9 @@
 use html5ever::tendril::StrTendril;
-use markup5ever_rcdom::NodeData::{Element, Text};
-use markup5ever_rcdom::{Handle, Node, NodeData};
-use std::borrow::Borrow;
-use std::collections::HashMap;
+use markup5ever_rcdom::{
+    NodeData::{Element, Text},
+    {Handle, Node, NodeData},
+};
+use std::{borrow::Borrow, collections::HashMap};
 
 pub(crate) trait TraverseDom {
     fn first_child_by_name(&self, name: &str) -> Option<Handle>;
@@ -20,9 +21,7 @@ impl TraverseDom for Node {
     fn first_child_by_name(&self, child_name: &str) -> Option<Handle> {
         for child in self.children.borrow().as_slice() {
             if let Element { ref name, .. } = child.data {
-                //console_debug!("name.local = {:?}", name.local);
                 if name.local.eq_str_ignore_ascii_case(child_name) {
-                    //console_debug!("name.local = child_name");
                     return Some(child.clone());
                 }
             }
@@ -34,9 +33,7 @@ impl TraverseDom for Node {
         let mut list = Vec::<Handle>::new();
         for child in self.children.borrow().as_slice() {
             if let Element { ref name, .. } = child.data {
-                //console_debug!("name.local = {:?}", name.local);
                 if name.local.eq_str_ignore_ascii_case(child_name) {
-                    //console_debug!("name.local = child_name");
                     list.push(child.clone());
                 }
             }

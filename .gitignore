@@ -4,3 +4,4 @@ wasm-pack.log
 build/
 /package.json
 /package-lock.json
+Cargo.lock
