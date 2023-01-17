@@ -16,3 +16,6 @@ reqwest = "0.11.13"
 tokio = { version = "1.23.0", features = ["full"] }
 serde_json = "1.0.91"
 bytes = "1.3.0"
+
+[net]
+git-fetch-with-cli = true #CVE-2022-46176
